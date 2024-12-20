@@ -62,18 +62,21 @@ export default function EditBook() {
 
   return (
     <ScrollView style={styles.container}>
+      <Text>Title</Text>
       <TextInput
         style={styles.input}
         placeholder="Title"
         value={book.title}
         onChangeText={(text) => setBook({ ...book, title: text })}
       />
+      <Text>Author</Text>
       <TextInput
         style={styles.input}
         placeholder="Author"
         value={book.author}
         onChangeText={(text) => setBook({ ...book, author: text })}
       />
+      <Text>Description</Text>
       <TextInput
         style={styles.input}
         placeholder="Description"
@@ -82,18 +85,13 @@ export default function EditBook() {
         multiline
         numberOfLines={4}
       />
+      <Text>Price</Text>
       <TextInput
         style={styles.input}
         placeholder="Price"
         value={book.price.toString()}
         onChangeText={(text) => setBook({ ...book, price: parseFloat(text) || 0 })}
         keyboardType="decimal-pad"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Image URL"
-        value={book.imageUrl}
-        onChangeText={(text) => setBook({ ...book, imageUrl: text })}
       />
       <Pressable style={styles.submitButton} onPress={handleSubmit}>
         <Text style={styles.submitButtonText}>Update Book</Text>

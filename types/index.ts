@@ -10,7 +10,6 @@ export interface Book {
   author: string;
   description: string;
   price: number;
-  imageUrl: string;
 }
 
 export interface AuthResponse {

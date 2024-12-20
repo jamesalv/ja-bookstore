@@ -16,11 +16,17 @@ export default function AddBook() {
   const [author, setAuthor] = useState('');
   const [description, setDescription] = useState('');
   const [price, setPrice] = useState('');
-  const [imageUrl, setImageUrl] = useState('');
   const router = useRouter();
 
+  function resetForm() {
+    setTitle('');
+    setAuthor('');
+    setDescription('');
+    setPrice('');
+  }
+
   async function handleSubmit() {
-    if (!title || !author || !description || !price || !imageUrl) {
+    if (!title || !author || !description || !price) {
       Alert.alert('Error', 'All fields are required');
       return;
     }
@@ -31,11 +37,12 @@ export default function AddBook() {
         author,
         description,
         price: parseFloat(price),
-        imageUrl,
       });
       Alert.alert('Success', 'Book added successfully', [
         { text: 'OK', onPress: () => router.back() },
       ]);
+      // Clear form fields
+      resetForm();
     } catch (error) {
       Alert.alert('Error', 'Failed to add book');
     }
@@ -43,18 +50,21 @@ export default function AddBook() {
 
   return (
     <ScrollView style={styles.container}>
+      <Text>Title</Text>
       <TextInput
         style={styles.input}
         placeholder="Title"
         value={title}
         onChangeText={setTitle}
       />
+      <Text>Author</Text>
       <TextInput
         style={styles.input}
         placeholder="Author"
         value={author}
         onChangeText={setAuthor}
       />
+      <Text>Description</Text>
       <TextInput
         style={styles.input}
         placeholder="Description"
@@ -63,18 +73,13 @@ export default function AddBook() {
         multiline
         numberOfLines={4}
       />
+      <Text>Price</Text>
       <TextInput
         style={styles.input}
         placeholder="Price"
         value={price}
         onChangeText={setPrice}
         keyboardType="decimal-pad"
-      />
-      <TextInput
-        style={styles.input}
-        placeholder="Image URL"
-        value={imageUrl}
-        onChangeText={setImageUrl}
       />
       <Pressable style={styles.submitButton} onPress={handleSubmit}>
         <Text style={styles.submitButtonText}>Add Book</Text>
